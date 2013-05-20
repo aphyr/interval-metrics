@@ -112,7 +112,7 @@
 
 (facts "performance"
        (println "Benchmarking rate")
-       (stress (rate) 1e9)
+       (stress (rate) 1e6)
 
        (println "Benchmarking reservoir")
-       (stress (uniform-reservoir) 1e8))
+       (stress (uniform-reservoir) 1e6))
