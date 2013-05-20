@@ -1,8 +1,8 @@
-(ns windowed-metrics.t-core
+(ns interval-metrics.t-core
   (:use midje.sweet
-        windowed-metrics.core
+        interval-metrics.core
         criterium.core)
-  (:import (windowed_metrics.core Rate)
+  (:import (interval_metrics.core Rate)
            (java.util.concurrent CountDownLatch
                                  TimeUnit)))
 

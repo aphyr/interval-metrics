@@ -6,7 +6,7 @@
  * http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/main/java/util/concurrent/ThreadLocalRandom.java?view=markup
  */
 
-package com.aphyr.windowed_metrics;
+package com.aphyr.interval_metrics;
 
 import java.util.Random;
 

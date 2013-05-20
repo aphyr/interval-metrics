@@ -1,4 +1,4 @@
-# windowed-metrics
+# interval-metrics
 
 Data structures for measuring performance. Provides lockless, high-performance
 mutable state, wrapped in idiomatic Clojure identities, without any external

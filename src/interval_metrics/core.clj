@@ -1,4 +1,4 @@
-(ns windowed-metrics.core
+(ns interval-metrics.core
   (:import (clojure.lang Counted
                          IDeref
                          Seqable
@@ -6,7 +6,7 @@
            (java.util.concurrent.atomic AtomicReference
                                         AtomicLong
                                         AtomicLongArray)
-           (com.aphyr.windowed_metrics ThreadLocalRandom)))
+           (com.aphyr.interval_metrics ThreadLocalRandom)))
 
 (defn next-long
   "Returns a pseudo-random long uniformly between 0 and n-1."
