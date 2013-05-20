@@ -11,6 +11,10 @@ specific time window--and you want the value of the metric at the end of the
 window to reflect observations from that window only, rather than including
 observations from prior windows.
 
+## Clojars
+
+https://clojars.org/interval-metrics
+
 ## Rates
 
 The `Metric` protocol defines an identity which wraps some mutable
