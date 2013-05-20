@@ -27,7 +27,7 @@ user=> (def r (rate))
 ```
 
 All operations are thread-safe, naturally. Let's tell the rate that we handled
-2 events, then 5 more events, than... I dunno, negative 22 events.
+2 events, then 5 more events, than... I dunno, negative 200 events.
 
 ``` clj
 user=> (update! r 2)
