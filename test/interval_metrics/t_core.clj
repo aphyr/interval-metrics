@@ -89,6 +89,23 @@
          ; Additional snapshots should be zero.
          (fact (snapshot! r) => 0.0)))
 
+(facts "rate+latency"
+       (let [n  100000
+             r  (rate+latency {:rate-unit   :nanoseconds
+                               :latency-unit :micros
+                               :quantiles    [0 1/2 1]})
+             t0 (System/nanoTime)
+             _  (dotimes [i n] (update! r i))
+             snap (snapshot! r)
+             t1 (System/nanoTime)]
+         (fact (:time snap) => pos?)
+         (fact (:rate snap) => (roughly (/ n (- t1 t0))
+                                        (/ (:rate snap) 5)))
+         (let [ls (:latencies snap)]
+           (fact (get ls 0)   => (roughly (/ 0 n 1000) 1))
+           (fact (get ls 1/2) => (roughly (/ n 2 1000) (/ n 10000)))
+           (fact (get ls 1)   => (roughly (/ n 1000)   1)))))
+
 (defn stress [metric n]
   (let [threads 4
         per-worker (/ n threads)
