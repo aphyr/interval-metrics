@@ -118,18 +118,22 @@
                      (range threads))
         reader (future
                  (while (not (.await latch 1 TimeUnit/SECONDS))
-                   (prn (snapshot! metric))))]
+;                   (prn (snapshot! metric))
+                        ))]
     (dorun (map deref workers))
     @reader
     (let [t1 (System/nanoTime)
           dt (nanos->seconds (- t1 t0))
           rate (/ n dt)]
-      (println "Completed" n "updates in" (format "%.3f" dt) "seconds")
-      (println rate "updates/sec"))))
+      (println "Completed" n "updates in" (format "%.3f" dt) "s: "
+               (format "%.3f" rate) "updates/sec"))))
 
 (facts "performance"
        (println "Benchmarking rate")
-       (stress (rate) 1e6)
+       (stress (rate) 1e9)
 
        (println "Benchmarking reservoir")
-       (stress (uniform-reservoir) 1e6))
+       (stress (uniform-reservoir) 1e9)
+       
+       (println "Benchmarking rate+latency")
+       (stress (rate+latency) 1e9))

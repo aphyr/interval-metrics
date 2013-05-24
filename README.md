@@ -202,11 +202,7 @@ typical (~1s) sampling intervals. Rates on a highly contended JVM are
 accurate, in experiments, to at least three sigfigs.
 
 With four threads updating, and one thread taking a snapshot every n seconds,
-my laptop can push roughly 15 million updates per second to a single rate
-object, saturating 99% of four cores.
-
-The same workload applied to a default-sized uniform-reservoir can push ~8.5
-million updates per second, again with 99-100% CPU use.
+my laptop can push between 10 to 18 million updates per second to a single rate+latency, reservoir, or rate object, saturating 99% of four cores.
 
 ## License
 
