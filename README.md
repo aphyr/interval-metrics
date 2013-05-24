@@ -137,6 +137,63 @@ user=> (map (partial quantile (snapshot! r)) [0.5 0.95 0.99 1])
 (496 945 983 999)
 ```
 
+## Measuring your code's performance
+
+The `interval-metrics.measure` namespace has some helpers for measuring common
+things about your code.
+
+```clj
+(use ['interval-metrics.measure :only '[periodically measure-latency]]
+     ['interval-metrics.core    :only '[snapshot! rate+latency]])
+```
+
+Define a hybrid metric which tracks both rates and latency distributions.
+
+```clj
+(def latencies (rate+latency))
+```
+
+Start a thread to snapshot the latencies every 5 seconds.
+
+```clj
+(def poller
+  (periodically 5 
+    (clojure.pprint/pprint (snapshot! latencies))))
+```
+
+The measure-latency macro times how long its body takes to execute, and updates
+the latencies metric each time.
+
+```clj
+(while true
+  (measure-latency latencies
+    (into [] (range 10))))
+```
+
+You'll see a map like this printed every 5 seconds, showing the rate of calls
+per second, and the latency distribution, in milliseconds.
+
+``` clj
+{:time 1369438387321/1000,
+ :rate 316831.2493798337,
+ :latencies
+ {0.0 2397/1000000,
+  0.5 2463/1000000,
+  0.95 2641/1000000,
+  0.99 2371/500000,
+  0.999 9597/1000000}}
+```
+
+Kill the loop with ^C, then shut down the poller thread by calling `(poller)`.
+
+You can configure the quantiles, reservoir size, and units for both the rate
+and the latencies by passing an options map to `rate+latency`:
+
+```clj
+(def latencies (rate+latency {:latency-unit :microseconds
+                              :rate-unit    :weeks}))
+```
+
 ## Performance
 
 All algorithms are lockless. I sacrifice some correctness for performance, but
