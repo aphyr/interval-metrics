@@ -53,7 +53,7 @@
     (catch NullPointerException e
       (when-not (contains? time-units a)
         (throw (IllegalArgumentException. (str "Don't know unit " a))))
-      (when-not (contains? (time-units b))
+      (when-not (contains? time-units b)
         (throw (IllegalArgumentException. (str "Don't know unit " b))))
       (throw e))))
 
