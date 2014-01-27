@@ -1,4 +1,4 @@
-(ns interval-metrics.t-core
+(ns interval-metrics.t-measure
   (:use midje.sweet
         interval-metrics.core
         criterium.core)
