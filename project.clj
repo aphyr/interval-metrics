@@ -1,4 +1,4 @@
-(defproject interval-metrics "0.0.3-SNAPSHOT"
+(defproject interval-metrics "1.0.0"
   :description "Time-windowed metric collection objects."
   :dependencies []
   :java-source-paths ["src/interval_metrics"]
@@ -6,4 +6,4 @@
 ;  :warn-on-reflection true
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
                                   [criterium "0.4.1"]
-                                  [midje "1.5.0"]]}})  
+                                  [midje "1.5.0"]]}})
