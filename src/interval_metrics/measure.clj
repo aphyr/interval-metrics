@@ -7,17 +7,22 @@
   []
   (/ (System/currentTimeMillis) 1000))
 
+(defn linear-time
+  "Returns a linear time source, in seconds."
+  []
+  (/ (System/nanoTime) 1e9))
+
 (defn periodically-
   "Spawns a thread which calls f every dt seconds. Returns a function which
   stops that thread."
   [dt f]
-  (let [anchor (unix-time)
+  (let [anchor   (linear-time)
         running? (promise)]
     (-> (bound-fn looper []
           ; Sleep until the next tick, or when the shutdown is delivered as
           ; false.
           (while (deref running?
-                        (* 1000 (- dt (mod (- (unix-time) anchor) dt)))
+                        (* 1000 (- dt (mod (- (linear-time) anchor) dt)))
                         true)
             (try
               (f)
