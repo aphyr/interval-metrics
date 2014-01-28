@@ -1,6 +1,6 @@
 # interval-metrics
 
-Data structures for measuring performance. Provides lockless, high-performance
+Data structures for measuring performance. Provides lockfree, high-performance
 mutable state, wrapped in idiomatic Clojure identities, without any external
 dependencies.
 
