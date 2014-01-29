@@ -1,4 +1,4 @@
-(defproject interval-metrics "1.0.0"
+(defproject interval-metrics "1.0.1-SNAPSHOT"
   :description "Time-windowed metric collection objects."
   :dependencies []
   :java-source-paths ["src/interval_metrics"]
