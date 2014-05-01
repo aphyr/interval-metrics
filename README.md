@@ -184,6 +184,29 @@ per second, and the latency distribution, in milliseconds.
   0.999 9597/1000000}}
 ```
 
+Don't like rationals? Who doesn't! It's easy to map those latencies to a less
+precise type:
+
+```clj
+(measure/periodically 5
+  (-> latencies
+      metrics/snapshot!
+      (update-in [:latencies]
+                 (partial map (juxt key (comp float val))))
+      pprint))
+
+...
+
+{:time 699491725283/500,
+ :rate 554.994854087713,
+ :latencies
+ ([0.0 9.388433]
+  [0.5 39.118896]
+  [0.95 50.673603]
+  [0.99 53.583065]
+  [0.999 57.83346])}
+```
+
 Kill the loop with ^C, then shut down the poller thread by calling `(poller)`.
 
 You can configure the quantiles, reservoir size, and units for both the rate
