@@ -17,18 +17,18 @@
   stops that thread."
   [dt f]
   (let [anchor   (linear-time)
-        running? (promise)]
-    (-> (bound-fn looper []
-          ; Sleep until the next tick, or when the shutdown is delivered as
-          ; false.
-          (while (deref running?
-                        (* 1000 (- dt (mod (- (linear-time) anchor) dt)))
-                        true)
-            (try
-              (f)
-              (catch Throwable t))))
-      (Thread. "interval-metrics periodic")
-      (.start))
+        running? (promise)
+        looper   (bound-fn looper []
+                   ; Sleep until the next tick, or when the shutdown is
+                   ; delivered as false.
+                   (while (deref running?
+                                 (* 1000 (- dt (mod (- (linear-time) anchor)
+                                                    dt)))
+                                 true)
+                     (try
+                       (f)
+                       (catch Throwable t))))]
+    (.start (Thread. ^Runnable looper "interval-metrics periodic"))
     #(deliver running? false)))
 
 (defmacro periodically

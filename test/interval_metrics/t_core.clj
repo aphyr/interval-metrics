@@ -128,12 +128,12 @@
       (println "Completed" n "updates in" (format "%.3f" dt) "s: "
                (format "%.3f" rate) "updates/sec"))))
 
-(facts "performance"
-       (println "Benchmarking rate")
-       (stress (rate) 1e9)
-
-       (println "Benchmarking reservoir")
-       (stress (uniform-reservoir) 1e9)
-       
-       (println "Benchmarking rate+latency")
-       (stress (rate+latency) 1e9))
+;(facts "performance"
+;       (println "Benchmarking rate")
+;       (stress (rate) 1e9)
+;
+;       (println "Benchmarking reservoir")
+;       (stress (uniform-reservoir) 1e9)
+;       
+;       (println "Benchmarking rate+latency")
+;       (stress (rate+latency) 1e9))
