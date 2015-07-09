@@ -1,7 +1,6 @@
 (ns interval-metrics.t-core
   (:use midje.sweet
-        interval-metrics.core
-        criterium.core)
+        interval-metrics.core)
   (:import (interval_metrics.core Rate)
            (java.util.concurrent CountDownLatch
                                  TimeUnit)))
@@ -134,6 +133,6 @@
 ;
 ;       (println "Benchmarking reservoir")
 ;       (stress (uniform-reservoir) 1e9)
-;       
+;
 ;       (println "Benchmarking rate+latency")
 ;       (stress (rate+latency) 1e9))
