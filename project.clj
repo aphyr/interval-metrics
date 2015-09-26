@@ -1,6 +1,9 @@
 (defproject interval-metrics "1.0.1-SNAPSHOT"
   :description "Time-windowed metric collection objects."
-  :dependencies [[org.clojure/clojure "1.7.0"]]
+  :dependencies []
   :java-source-paths ["src/interval_metrics"]
-  :profiles {:dev {:dependencies [[org.clojure/clojure "1.7.0"]
-                                  [midje "1.7.0"]]}})
+  :javac-options ["-target" "1.6" "-source" "1.6"]
+;  :warn-on-reflection true
+  :profiles {:dev {:dependencies [[org.clojure/clojure "1.5.1"]
+                                  [criterium "0.4.1"]
+                                  [midje "1.5.0"]]}})
